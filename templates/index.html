@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Web-based Query</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link href="https://cdn.jsdelivr.net/css-toggle-switch/latest/toggle-switch.css" rel="stylesheet" />
+		<link rel="stylesheet" href="static/css/textBased.css">
+
+		
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		
+		<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js">
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+	</head>
+	<div class="cntr">
+	
+		<header>
+			<p align="center"><font face = "Times New Roman" align="center" font size="6"><b>Cloud based Database Querying</b></font></p>
+			<form id="initForm" action="" method="get">
+				
+				<span><font face = "Times New Roman" font size="5"><b>&emsp;<u>Select DBMS:</u> </b></font></span>&emsp;
+				<span class="switch-toggle switch-3 switch-candy">
+					
+					<input id="ms" name="opt" value ="ms" type="radio" onclick="ModifyPlaceHolder(this)" checked="checked">
+					<label for="ms" onclick="">MySQL</label>
+					
+					<input id="bq" name="opt" value ="bq" type="radio" onclick="ModifyPlaceHolder(this)">
+					<label for="bq" onclick="">BigQuery</label>
+					
+					<input id="md" name="opt" value ="md" type="radio" onclick="ModifyPlaceHolder(this)">
+					<label for="md" onclick="">MongoDB</label>
+
+					<a></a>
+				</span>
+
+
+				<div class="textwrapper">
+					<textarea placeholder="Enter query here..." id="DBquery" name="DBquery" rows="8" wrap="soft">{{query}}</textarea>
+				</div>
+
+				&emsp;<input type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click to run the above query" onclick="RunBtnClickEvent()" value="RUN"></button>
+			</form>
+			<span>&emsp;<b>{{stmt}}{{time}}</b></span>
+		</header>
+		<div class="body">
+			<body style="background-color:#BFC9CA" onload="clickOption()">
+			
+			<!--<div style="overflow-x:auto;">-->
+				<table id="advTable" class="table table-striped table-bordered" style="width:100%">
+					<thead>
+						{{ h|safe }}
+					</thead>
+					<tbody>
+						{{ r|safe }}
+					</tbody>
+				</table>
+				
+				
+				<script src="static/js/textBased.js"></script>				
+			</body>
+		</div>
+	</div>
+</html>

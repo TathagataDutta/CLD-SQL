@@ -1,0 +1,9 @@
+numpy
+Flask
+sqlalchemy
+pymysql
+google-cloud-bigquery
+flask_pymongo
+dnspython
+db
+json2table

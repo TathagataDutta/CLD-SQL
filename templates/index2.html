@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>APM</title>
+  <meta charset="utf-8">
+  <!--Mobile Adaptation-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="//www.amcharts.com/lib/4/core.js"></script>
+  <script src="//www.amcharts.com/lib/4/charts.js"></script>
+  <script src="//www.amcharts.com/lib/4/themes/animated.js"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/css/styles.css">
+  <link rel="stylesheet" href="static/css/indexPage.css">
+  <link rel="stylesheet" href="static/css/dash.css">
+  <script type="text/javascript">
+    $(function () {
+      $("#navigation").load("navigation.html");
+    });
+  </script>
+  <style>
+    body {
+      padding-top: 58px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navigation"></div>
+
+    <section class="slider-pages">
+
+      <article class="js-scrolling__page js-scrolling__page-1 js-scrolling--active">
+        <div class="slider-page slider-page--left">
+          <div class="slider-page--skew">
+            <div class="slider-page__content">
+            </div>
+            <!-- /.slider-page__content -->
+          </div>
+          <!-- /.slider-page--skew -->
+        </div>
+        <!-- /.slider-page slider-page--left -->
+    
+        <div class="slider-page slider-page--right">
+          <div class="slider-page--skew">
+            <div class="slider-page__content">
+              <h1 class="slider-page__title slider-page__title--big" style="font-size: 60px;">
+                <u>TIME SERIES</u>
+              </h1>
+              <!-- /.slider-page__title slider-page__title--big -->
+              <h2 class="slider-page__title" style="font-size: 25px;">
+                Explore Depature delays, Arrival Details and Cancellations and compare trends, similarities, etc. <a class="slider-page__link" href="/TimeSeries.html"
+                target="_blank">Click here</a>
+              </h2>
+              <!-- /.slider-page__title -->
+              <br><br>
+              <p class="slider-page__description">
+                Please scroll down or press the down arrow on your keyboard
+              </p>
+              <!-- /.slider-page__description -->
+            </div>
+            <!-- /.slider-page__content -->
+          </div>
+          <!-- /.slider-page--skew -->
+        </div>
+        <!-- /.slider-page slider-page--right -->
+      </article>
+      <!-- /.js-scrolling__page js-scrolling__page-1 js-scrolling--active -->
+    
+    
+      <article class="js-scrolling__page js-scrolling__page-2">
+        <div class="slider-page slider-page--left">
+          <div class="slider-page--skew">
+            <div class="slider-page__content">
+              <h1 class="slider-page__title slider-page__title--big" style="font-size: 60px;">
+                <u>AIRPORT</u>
+              </h1>
+              <!-- /.slider-page__title slider-page__title--big -->
+              <h2 class="slider-page__title" style="font-size: 25px;">
+                Get a variety of metrics for any airport such as on time rate, number of connections, it's performance over different period of time, etc. <a class="slider-page__link" href="/APmap.html"
+                target="_blank">Click here</a>
+              </h2>
+              <br>
+              <h2 class="slider-page__title" style="font-size: 25px;">
+                Analyze inter airport delays between top airports. <a class="slider-page__link" href="/APPerf.html"
+                target="_blank">Click here</a>
+              </h2>
+              <!-- /.slider-page__title -->
+              <br><br>
+              <p class="slider-page__description">
+                Please continue scrolling
+              </p>
+              <!-- /.slider-page__description -->
+            </div>
+            <!-- /.slider-page__content -->
+          </div>
+          <!-- /.slider-page--skew -->
+        </div>
+        <!-- /.slider-page slider-page--left -->
+    
+        <div class="slider-page slider-page--right">
+          <div class="slider-page--skew">
+            <div class="slider-page__content">
+            </div>
+            <!-- /.slider-page__content -->
+          </div>
+          <!-- /.slider-page--skew -->
+        </div>
+        <!-- /.slider-page slider-page--right -->
+      </article>
+      <!-- /.js-scrolling__page js-scrolling__page-2 -->
+    
+    
+      <article class="js-scrolling__page js-scrolling__page-3">
+        <div class="slider-page slider-page--left">
+          <div class="slider-page--skew">
+            <div class="slider-page__content">
+            </div>
+            <!-- /.slider-page__content -->
+          </div>
+          <!-- /.slider-page--skew -->
+        </div>
+        <!-- /.slider-page slider-page--left -->
+    
+        <div class="slider-page slider-page--right">
+          <div class="slider-page--skew">
+            <div class="slider-page__content">
+              <h1 class="slider-page__title slider-page__title--big" style="font-size: 60px;">
+                <u>AIRLINE</u>
+              </h1>
+              <!-- /.slider-page__title slider-page__title--big -->
+              <h2 class="slider-page__title" style="font-size: 25px;">
+                Analyze airline delays with multiple selection criteria for  
+                <a class="slider-page__link" href="/ALComp.html" target="_blank">Overall</a> 
+                and 
+                <a class="slider-page__link" href="/ALMonthWise.html" target="_blank">Monthwise</a>
+                Data.
+              </h2>
+              <br>
+              <h2 class="slider-page__title" style="font-size: 25px;">
+                Analyze airline cancellations with multiple selection criteria. <a class="slider-page__link" href="/ALCancel.html"
+                target="_blank">Click here</a>
+              </h2>
+              <!-- /.slider-page__description -->
+            </div>
+            <!-- /.slider-page__content -->
+          </div>
+          <!-- /.slider-page--skew -->
+        </div>
+        <!-- /.slider-page slider-page--right -->
+      </article>
+      <!-- /.js-scrolling__page js-scrolling__page-3 -->
+    
+    </section>
+
+
+  <script src="static/js/indexPage.js"></script>
+  <script src="static/js/dash.js"></script>
+  <script>
+
+  </script>
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+  crossorigin="anonymous"></script>
+</body>
+
+</html>
