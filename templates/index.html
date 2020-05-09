@@ -1,77 +1,166 @@
-<!DOCTYPE html PUBLIC>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Web-based Query</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
 
-		<!-- LOAD CSS -->
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
-		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<link href="https://cdn.jsdelivr.net/css-toggle-switch/latest/toggle-switch.css" rel="stylesheet" />
-		
-		<link rel="stylesheet" href="static/css/textBased.css">
+<head>
+  <title>APM</title>
+  <meta charset="utf-8">
+  <!--Mobile Adaptation-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		
-		<!-- LOAD JS -->
-		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-		
-		<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="//www.amcharts.com/lib/4/core.js"></script>
+  <script src="//www.amcharts.com/lib/4/charts.js"></script>
+  <script src="//www.amcharts.com/lib/4/themes/animated.js"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/css/styles.css">
+  <link rel="stylesheet" href="static/css/dash.css">
+  <script type="text/javascript">
+    $(function () {
+      $("#navigation").load("navigation.html");
+    });
+  </script>
+  <style>
+    body {
+      padding-top: 58px;
+    }
+  </style>
+</head>
 
-		<script src="static/js/textBased.js"></script>
-	</head>
-	<div class="cntr">
-	
-		<header>
-			<p align="center"><font face = "Times New Roman" align="center" font size="6"><b>Cloud based Database Querying</b></font></p>
-			<form id="initForm" action="" method="get">
-				
-				<span><font face = "Times New Roman" font size="5"><b>&emsp;<u>Select DBMS:</u> </b></font></span>&emsp;
-				<span class="switch-toggle switch-3 switch-candy">
-					
-					<input id="ms" name="opt" value ="ms" type="radio" onclick="ModifyPlaceHolder(this)" checked="checked">
-					<label for="ms" onclick="">MySQL</label>
-					
-					<input id="bq" name="opt" value ="bq" type="radio" onclick="ModifyPlaceHolder(this)">
-					<label for="bq" onclick="">BigQuery</label>
-					
-					<input id="md" name="opt" value ="md" type="radio" onclick="ModifyPlaceHolder(this)">
-					<label for="md" onclick="">MongoDB</label>
+<body>
+  <div id="navigation"></div>
 
-					<a></a>
-				</span>
+    <section class="slider-pages">
+
+      <article class="js-scrolling__page js-scrolling__page-1 js-scrolling--active">
+        <div class="slider-page slider-page--left">
+          <div class="slider-page--skew">
+            <div class="slider-page__content">
+            </div>
+            <!-- /.slider-page__content -->
+          </div>
+          <!-- /.slider-page--skew -->
+        </div>
+        <!-- /.slider-page slider-page--left -->
+    
+        <div class="slider-page slider-page--right">
+          <div class="slider-page--skew">
+            <div class="slider-page__content">
+              <h1 class="slider-page__title slider-page__title--big" style="font-size: 60px;">
+                <u>My SQL</u>
+              </h1>
+              <!-- /.slider-page__title slider-page__title--big -->
+              <h2 class="slider-page__title" style="font-size: 25px;">
+                Some description about MySQL. <a class="slider-page__link" href="https://www.mysql.com/"
+                target="_blank">Official Website</a>
+              </h2>
+              <!-- /.slider-page__title -->
+              <br><br>
+              <p class="slider-page__description">
+                Please scroll down or press the down arrow on your keyboard
+              </p>
+              <!-- /.slider-page__description -->
+            </div>
+            <!-- /.slider-page__content -->
+          </div>
+          <!-- /.slider-page--skew -->
+        </div>
+        <!-- /.slider-page slider-page--right -->
+      </article>
+      <!-- /.js-scrolling__page js-scrolling__page-1 js-scrolling--active -->
+    
+    
+      <article class="js-scrolling__page js-scrolling__page-2">
+        <div class="slider-page slider-page--left">
+          <div class="slider-page--skew">
+            <div class="slider-page__content">
+              <h1 class="slider-page__title slider-page__title--big" style="font-size: 60px;">
+                <u>BigQuery</u>
+              </h1>
+              <!-- /.slider-page__title slider-page__title--big -->
+              <h2 class="slider-page__title" style="font-size: 25px;">
+                Some Big Query description. <a class="slider-page__link" href="https://cloud.google.com/bigquery"
+                target="_blank">Official Website</a>
+              </h2>
+              <br>
+              <!-- /.slider-page__title -->
+              <br><br>
+              <p class="slider-page__description">
+                Please continue scrolling
+              </p>
+              <!-- /.slider-page__description -->
+            </div>
+            <!-- /.slider-page__content -->
+          </div>
+          <!-- /.slider-page--skew -->
+        </div>
+        <!-- /.slider-page slider-page--left -->
+    
+        <div class="slider-page slider-page--right">
+          <div class="slider-page--skew">
+            <div class="slider-page__content">
+            </div>
+            <!-- /.slider-page__content -->
+          </div>
+          <!-- /.slider-page--skew -->
+        </div>
+        <!-- /.slider-page slider-page--right -->
+      </article>
+      <!-- /.js-scrolling__page js-scrolling__page-2 -->
+    
+    
+      <article class="js-scrolling__page js-scrolling__page-3">
+        <div class="slider-page slider-page--left">
+          <div class="slider-page--skew">
+            <div class="slider-page__content">
+            </div>
+            <!-- /.slider-page__content -->
+          </div>
+          <!-- /.slider-page--skew -->
+        </div>
+        <!-- /.slider-page slider-page--left -->
+    
+        <div class="slider-page slider-page--right">
+          <div class="slider-page--skew">
+            <div class="slider-page__content">
+              <h1 class="slider-page__title slider-page__title--big" style="font-size: 60px;">
+                <u>MongoDB</u>
+              </h1>
+              <!-- /.slider-page__title slider-page__title--big -->
+              <br>
+              <h2 class="slider-page__title" style="font-size: 25px;">
+                Some MongoDB info. <a class="slider-page__link" href="https://www.mongodb.com/"
+                target="_blank">Click here</a>
+              </h2>
+              <!-- /.slider-page__description -->
+            </div>
+            <!-- /.slider-page__content -->
+          </div>
+          <!-- /.slider-page--skew -->
+        </div>
+        <!-- /.slider-page slider-page--right -->
+      </article>
+      <!-- /.js-scrolling__page js-scrolling__page-3 -->
+    
+    </section>
 
 
-				<div class="textwrapper">
-					<textarea placeholder="Enter query here..." id="DBquery" name="DBquery" rows="8" wrap="soft">{{query}}</textarea>
-				</div>
+  <script src="static/js/indexPage.js"></script>
+  <script src="static/js/dash.js"></script>
+  <script>
 
-				&emsp;<input type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click to run the above query" onclick="RunBtnClickEvent()" value="RUN"></button>
-			</form>
-			<span>&emsp;<b>{{stmt}}{{time}}</b></span>
-		</header>
-		<div class="body">
-			<body style="background-color:#BFC9CA" onload="clickOption()">
-			
-				<!--<div style="overflow-x:auto;">-->
-				<table id="advTable" class="table table-striped table-bordered" style="width:100%">
-					<thead>
-						{{ h|safe }}
-					</thead>
-					<tbody>
-						{{ r|safe }}
-					</tbody>
-				</table>
-				
-				
-				
-			</body>
-		</div>
-	</div>
+  </script>
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+  crossorigin="anonymous"></script>
+</body>
+
 </html>

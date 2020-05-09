@@ -33,10 +33,18 @@ cloud_sql_connection_name = "cldsql:us-east4:ic-mysql"
 
 logger = logging.getLogger()
 
+@app.route('/')
+@app.route('/index.html', methods=["GET","POST"])
+def index():
+	return render_template('index.html')
+
+@app.route('/navigation.html', methods=["GET","POST"])
+def navigationPage():
+	return render_template('navigation.html')
 
 
-@app.route('/', methods=['GET'])
-def MainPage():
+@app.route('/textBased.html', methods=['GET'])
+def textBased():
 	logging.error("a ["+flask.request.method+"] request came")
 	if flask.request.method == 'GET':
 		opt = request.values.get('opt')
@@ -139,7 +147,7 @@ def MainPage():
 					
 					query = query.replace("%%","%")
 					stmt="Query completed successfully. "
-					return render_template("index.html", stmt=stmt, r=r, h=h, time=time, query=query,chc=opt)
+					return render_template("textBased.html", stmt=stmt, r=r, h=h, time=time, query=query,chc=opt)
 				
 				except SQLAlchemyError as e:
 					error = str(e.__dict__['orig'])
@@ -147,7 +155,7 @@ def MainPage():
 					#print(e)
 					stmt=error
 					#print("Stmt Error :: "+error)
-					return render_template("index.html", stmt=stmt, r="", h="", time="", query=query,chc=opt)
+					return render_template("textBased.html", stmt=stmt, r="", h="", time="", query=query,chc=opt)
 					
 
 		elif opt=="bq":
@@ -182,12 +190,12 @@ def MainPage():
 
 				
 				stmt="Query completed successfully. "
-				return render_template("index.html", stmt=stmt, r=r, h=h, time=time,query=Q,chc=opt)
+				return render_template("textBased.html", stmt=stmt, r=r, h=h, time=time,query=Q,chc=opt)
 			except BadRequest as e:
 				for e in query_job.errors:
 					print('ERROR: {}'.format(e['message']))
 					stmt+='ERROR: {}'.format(e['message'])
-				return render_template("index.html", stmt=stmt, r="", h="", time="",query=Q,chc=opt)
+				return render_template("textBased.html", stmt=stmt, r="", h="", time="",query=Q,chc=opt)
 		elif opt=="md":
 		#===============================MONGO DB ATLAS=====================			
 			t1=datetime.datetime.now()
@@ -215,9 +223,9 @@ def MainPage():
 			r,h=sqlTable(rows,header)
 			time="Time to execute query: "+str(time)+" seconds"
 			stmt="Query completed successfully. "
-			return render_template("index.html", stmt=stmt, r=r, h=h, time=time,query=query,chc=opt)
+			return render_template("textBased.html", stmt=stmt, r=r, h=h, time=time,query=query,chc=opt)
 		else:
-			return render_template("index.html", stmt="",time="",query="",chc="ms")
+			return render_template("textBased.html", stmt="",time="",query="",chc="ms")
 	
 def sqlTable(rows,header):
 	h=""
