@@ -226,7 +226,14 @@ def textBased():
 			return render_template("textBased.html", stmt=stmt, r=r, h=h, time=time,query=query,chc=opt)
 		else:
 			return render_template("textBased.html", stmt="",time="",query="",chc="ms")
-	
+
+
+@app.route('/voiceBased.html', methods=["GET","POST"])
+def voiceBasedPage():
+	return render_template('voiceBased.html')
+
+
+
 def sqlTable(rows,header):
 	h=""
 	for x in header:
