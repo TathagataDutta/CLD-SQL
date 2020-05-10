@@ -7,3 +7,6 @@ flask_pymongo
 dnspython
 db
 json2table
+pyaudio
+SpeechRecognition
+google-cloud-speech
