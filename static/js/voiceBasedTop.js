@@ -1,17 +1,17 @@
 // function clickOption()
 // {
-// 	document.getElementById("{{chc}}").checked = "checked";
+// 	document.getElementById("{{chc}}").checked = true;
 // }
 
 
 function RunBtnClickEvent()
 {
 	//var opt=document.getElementById("opt").value;
-	//var query=document.getElementById("DBquery").value;
+	//var query=document.getElementById("final_span").value;
 	//alert(query);
 	//document.getElementById("DBQoutput").value="RESULT\n"+query;
 	
-	if(document.getElementById("DBquery").value=="")
+	if(document.getElementById("final_span").value=="")
 	{
 		swal({
 			title: "Empty Query",
@@ -22,7 +22,7 @@ function RunBtnClickEvent()
 		//alert("Please enter query");
 		//return false;
 	}
-	else //if(document.getElementById("DBquery").value!="")
+	else //if(document.getElementById("final_span").value!="")
 	{
 		document.getElementById("initForm").submit();
 	}
@@ -37,7 +37,7 @@ function ModifyPlaceHolder(element)
 		bq: 'SELECT * FROM `cldsql.instacart.aisles`',
 		md: '{"order_id": 1, "reordered": 1}'
 	};
-	var input = element.form.DBquery;
+	var input = element.form.final_span;
 	input.placeholder = data[element.id];
 }
 

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Web-based Query</title>
+		<title>Text-based Query</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<!-- LOAD CSS -->
@@ -26,6 +26,15 @@
 
 		<script src="static/js/textBased.js"></script>
 		<link rel="stylesheet" href="static/css/styles.css">
+
+
+		<script>
+		function clickOption()
+		{
+			document.getElementById("{{chc}}").checked = "checked";
+		}
+		</script>
+
 		<script type="text/javascript">
 			$(function () {
 				$("#navigation").load("navigation.html");

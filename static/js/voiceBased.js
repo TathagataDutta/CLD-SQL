@@ -67,7 +67,7 @@ else
     }
     if (event.error == 'not-allowed') 
     {
-      if (event.timeStamp - start_timestamp < 100) 
+      if (event.timeStamp - start_timestamp < 500) 
       {
         showInfo('info_blocked');
       } 

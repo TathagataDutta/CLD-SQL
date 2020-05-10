@@ -1,6 +1,7 @@
 import numpy as np
 from flask import Flask, render_template, request, send_file
 import flask
+#from flask_talisman import Talisman
 from google.cloud import bigquery
 from google.api_core.exceptions import BadRequest
 import logging
@@ -11,6 +12,7 @@ from flask_pymongo import pymongo
 import json
 
 app = Flask(__name__)
+#Talisman(app)
 
 #MongoDB Connection
 CONNECTION_STRING="mongodb+srv://td:hello123@tdcluster-9louv.gcp.mongodb.net/test?retryWrites=true&w=majority"
@@ -46,11 +48,13 @@ def navigationPage():
 @app.route('/textBased.html', methods=['GET'])
 def textBased():
 	logging.error("a ["+flask.request.method+"] request came")
+	logging.error("00")
 	if flask.request.method == 'GET':
 		opt = request.values.get('opt')
 		
-		
+		logging.error("01")
 		if opt=="ms":
+			logging.error("02")
 		#===============================CLOUD SQL====================
 		
 			# [START cloud_sql_mysql_sqlalchemy_create]
@@ -96,7 +100,7 @@ def textBased():
 			)
 			# [END cloud_sql_mysql_sqlalchemy_create]
 		
-		
+			logging.error("03")
 			votes = []
 			with db.connect() as conn:
 				# Execute the query and fetch all results
@@ -131,6 +135,8 @@ def textBased():
 						r=""
 						h=""
 					
+					logging.error("04")
+
 					t2=datetime.datetime.now()
 					tDiff=t2-t1
 					time=tDiff.total_seconds()
@@ -147,6 +153,7 @@ def textBased():
 					
 					query = query.replace("%%","%")
 					stmt="Query completed successfully. "
+					logging.error("05")
 					return render_template("textBased.html", stmt=stmt, r=r, h=h, time=time, query=query,chc=opt)
 				
 				except SQLAlchemyError as e:
@@ -230,8 +237,119 @@ def textBased():
 
 @app.route('/voiceBased.html', methods=["GET","POST"])
 def voiceBasedPage():
-	return render_template('voiceBased.html')
-
+	logging.error("a ["+flask.request.method+"] request came")
+	#return render_template("voiceBased.html")
+	if flask.request.method == 'GET':
+		opt = request.values.get('opt')		
+		
+		if opt=="ms":
+		#===============================CLOUD SQL====================
+		
+			# [START cloud_sql_mysql_sqlalchemy_create]
+			# The SQLAlchemy engine will help manage interactions, including automatically
+			# managing a pool of connections to your database
+			db = sqlalchemy.create_engine(
+				# Equivalent URL:
+				# mysql+pymysql://<db_user>:<db_pass>@/<db_name>?unix_socket=/cloudsql/<cloud_sql_instance_name>
+				sqlalchemy.engine.url.URL(
+					drivername="mysql+pymysql",
+					username=db_user,
+					password=db_pass,
+					database=db_name,
+					query={"unix_socket": "/cloudsql/{}".format(cloud_sql_connection_name)},
+				),
+				# ... Specify additional properties here.
+				# [START_EXCLUDE]
+				# [START cloud_sql_mysql_sqlalchemy_limit]
+				# Pool size is the maximum number of permanent connections to keep.
+				pool_size=5,
+				# Temporarily exceeds the set pool_size if no connections are available.
+				max_overflow=2,
+				# The total number of concurrent connections for your application will be
+				# a total of pool_size and max_overflow.
+				# [END cloud_sql_mysql_sqlalchemy_limit]
+				# [START cloud_sql_mysql_sqlalchemy_backoff]
+				# SQLAlchemy automatically uses delays between failed connection attempts,
+				# but provides no arguments for configuration.
+				# [END cloud_sql_mysql_sqlalchemy_backoff]
+				# [START cloud_sql_mysql_sqlalchemy_timeout]
+				# 'pool_timeout' is the maximum number of seconds to wait when retrieving a
+				# new connection from the pool. After the specified amount of time, an
+				# exception will be thrown.
+				pool_timeout=30,  # 30 seconds
+				# [END cloud_sql_mysql_sqlalchemy_timeout]
+				# [START cloud_sql_mysql_sqlalchemy_lifetime]
+				# 'pool_recycle' is the maximum number of seconds a connection can persist.
+				# Connections that live longer than the specified amount of time will be
+				# reestablished
+				pool_recycle=1800,  # 30 minutes
+				# [END cloud_sql_mysql_sqlalchemy_lifetime]
+				# [END_EXCLUDE]
+			)
+			# [END cloud_sql_mysql_sqlalchemy_create]
+		
+		
+			votes = []
+			with db.connect() as conn:
+				# Execute the query and fetch all results
+			#	recent_votes = conn.execute(
+			#		"SELECT * from departments"
+			#	).fetchall()
+			#	# Convert the results into a list of dicts representing votes
+			#	for row in recent_votes:
+			#		votes.append({"candidate": row[0], "time_cast": row[1]})
+			
+				stmt=""
+				try:
+					
+					query = request.values.get('final_span').replace("%","%%")
+					#res=conn.execute(
+					#	"SELECT * from departments LIMIT 4"
+					#).fetchall()
+					#for row in res:
+					#	data=data+row
+					
+					t1=datetime.datetime.now()
+					
+					if "select" in query.lower() or "show" in query.lower():
+						#rows=conn.execute(query).fetchmany(1000)
+						#query=query.limit(1000)
+						query=setLimit(query,1000)
+						rows=conn.execute(query).fetchall()
+						header=conn.execute(query).keys()
+						r,h=sqlTable(rows,header)
+					else:
+						rows=conn.execute(query)#.fetchall()
+						r=""
+						h=""
+					
+					t2=datetime.datetime.now()
+					tDiff=t2-t1
+					time=tDiff.total_seconds()
+					time="Time to execute query: "+str(time)+" seconds"
+					#table=sqlTable(data)
+					#stmt = sqlalchemy.text(
+					#	"SELECT * FROM aisles LIMIT 10"
+					#)
+					# Count number of votes for tabs
+					#tab_result = conn.execute(stmt).fetchone()
+					#data = tab_result[0]
+				
+					#header=conn.column_names
+					
+					query = query.replace("%%","%")
+					stmt="Query completed successfully. "
+					return render_template("voiceBased.html", stmt=stmt, r=r, h=h, time=time, query=query,chc=opt)
+				
+				except SQLAlchemyError as e:
+					error = str(e.__dict__['orig'])
+					#print("SQLAlchemyError\n")
+					#print(e)
+					stmt=error
+					#print("Stmt Error :: "+error)
+					return render_template("voiceBased.html", stmt=stmt, r="", h="", time="", query=query,chc=opt)
+		else:
+			return render_template("voiceBased.html", stmt="",time="",query="",chc="ms")
 
 
 def sqlTable(rows,header):
