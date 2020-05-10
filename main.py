@@ -301,7 +301,7 @@ def voiceBasedPage():
 			
 				stmt=""
 				try:
-					
+					query = processVoice(query)
 					query = request.values.get('final_span').replace("%","%%")
 					#res=conn.execute(
 					#	"SELECT * from departments LIMIT 4"
@@ -370,6 +370,26 @@ def setLimit(query,limit):
 	if ("select" in query.lower() and "limit" not in query.lower() and "create" not in query.lower()):
 		query = query.replace(";","")
 		query += " LIMIT "+str(limit)+";"
+	return query
+
+
+def processVoice(query):
+	pass
+	select=["find", "show"]
+	remove=["me", "us", "the"]
+	star=["star"]
+
+	query=replaceString(query,select,"select")
+	query=replaceString(query,remove,"")
+	query=replaceString(query,star,"*")
+
+
+	return query
+
+def replaceString(query, old, new):
+	pass
+	for item in old:
+		query = query.replace(item, new, 1)
 	return query
 
 if __name__ == '__main__':
