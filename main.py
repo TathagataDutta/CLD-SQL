@@ -379,7 +379,7 @@ def setLimit(query,limit):
 def processVoice(query):
 	select=[" find", " show", " give"]
 	remove=[" me", " us", " the"]
-	star=[" star"," everything", " entries"]
+	star=[" star"," everything", " entries", "entry"]
 	and_=[" and"]
 
 	query=replaceString(query,select," select")
@@ -392,11 +392,16 @@ def processVoice(query):
 	query=topX_Limit(query)
 	query=spaceToUnderScore(query)
 
+	#capitalize keywords and remove space from start
+	query=query.replace(" from "," FROM ").replace(" where "," WHERE ").replace(" select ", " SELECT ")[1:]
 	return query
 
 def replaceString(query, old, new):
+	query1=query[0:query.find("from")]
+	query2=query[query.find("from"):]
 	for item in old:
-		query = query.replace(item, new, 1)
+		query1 = query1.replace(item, new, 1)
+	query=query1+query2
 	return query
 
 
@@ -418,10 +423,13 @@ def whereClause(query):
 					"is greater than equal to": ">=",
 					"is less than or equal to": "<=",
 					"is less than equal to": "<=",
+
 					"is equal to": "=",
 					"is greater than": ">",
 					"is less than": "<",
-					"is not equal to": "!="
+					"is not equal to": "!=",
+					
+					"is between": "BETWEEN"
 				}
 
 	for key in whereDict:

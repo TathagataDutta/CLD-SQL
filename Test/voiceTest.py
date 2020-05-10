@@ -23,8 +23,12 @@ def processVoice(query):
 	return query
 
 def replaceString(query, old, new):
+	query1=query[0:query.find("from")]
+	query2=query[query.find("from"):]
 	for item in old:
-		query = query.replace(item, new, 1)
+		query1 = query1.replace(item, new, 1)
+	query=query1+query2
+	print(query1+"."+query2)
 	return query
 
 
@@ -97,6 +101,6 @@ def spaceToUnderScore(query):
 	query=query.replace(mid,mid2)
 	return query
 
-query="show me everything from products where product id is equal to 1"
+query="show me everything from products where product id is between 1 and 10"
 query=processVoice(query)
 print("FINAL",query)
