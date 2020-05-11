@@ -376,7 +376,6 @@ def setLimit(query,limit):
 	return query
 
 
-
 def processVoice(query):
 	query=" "+query
 	select=[" find", " show", " give"]
@@ -390,6 +389,8 @@ def processVoice(query):
 	query=replaceString(query,and_," ,")
 
 	query=query.replace("  "," ")
+
+	query=mathOps(query)
 	query=whereClause(query)
 	query=orderByClause(query)
 	query=topX_Limit(query)
@@ -407,12 +408,41 @@ def replaceString(query, old, new):
 	query=query1+query2
 	return query
 
+def mathOps(query):
+	pass
+	#show me the smallest value of order_hour_of_day from orders
+	#SELECT MIN(order_hour_of_day) FROM orders;
+
+	if not(" value of " in query or " average of " in query or " mean of " in query or " sum of " in query or " some of " in query):
+		return query
+
+	mathOpsDict={
+					" smallest value of ": "MIN(",
+					" least value of ": "MIN(",
+					" lowest value of ": "MIN(",
+
+					" largest value of ": "MAX(",
+					" highest value of ": "MAX(",
+
+					" average value of ": "AVG(",
+					" average of ": "AVG(",
+					" mean value of ": "AVG(",
+					" mean of ": "AVG(",
+
+					" sum of ": "SUM(",
+					" some of ": "SUM(",
+				}
+
+	for key in mathOpsDict:
+		query = query.replace(key, mathOpsDict[key])
+
+	query=query.replace(" from", ") from")
+	return query
 
 def whereClause(query):
     #add underscore to where attribute
 	if " where " not in query:
 		return query
-	
 	start = 'where '
 	end = ' is'
 	mid=query[query.find(start)+len(start):query.find(end)]
@@ -522,7 +552,6 @@ def topX_Limit(query):
 	query=query+" limit "+limit
 	return query
 
-
 def spaceToUnderScore(query):
 	start = 'select '
 	end = ' from'
@@ -535,6 +564,7 @@ def spaceToUnderScore(query):
 
 	query=query.replace(mid,mid2)
 	return query
+
 
 
 

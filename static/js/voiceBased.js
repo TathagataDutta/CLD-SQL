@@ -156,7 +156,7 @@ function startButton(event)
   }
   final_transcript = '';
   // recognition.lang = select_dialect.value;
-  recognition.lang = "en-US"
+  recognition.lang = "en-IN"
   recognition.start();
   ignore_onend = false;
   final_span.innerHTML = '';
