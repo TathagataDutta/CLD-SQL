@@ -1,7 +1,10 @@
+print(chr(27)+'[2j')
+
 def processVoice(query):
+	query=" "+query
 	select=[" find", " show", " give"]
 	remove=[" me", " us", " the"]
-	star=[" star"," everything", " entries"]
+	star=[" star"," everything", " entries", "entry"]
 	and_=[" and"]
 
 	query=replaceString(query,select," select")
@@ -10,16 +13,13 @@ def processVoice(query):
 	query=replaceString(query,and_," ,")
 
 	query=query.replace("  "," ")
-
 	query=whereClause(query)
-
+	query=orderByClause(query)
 	query=topX_Limit(query)
 	query=spaceToUnderScore(query)
 
-
-
-
-
+	#capitalize keywords and remove space from start
+	query=query.replace(" from "," FROM ").replace(" where "," WHERE ").replace(" select ", " SELECT ").replace(" and ", " AND ").replace(" or "," OR ").replace(" order by ", " ORDER BY ")
 	return query
 
 def replaceString(query, old, new):
@@ -28,16 +28,17 @@ def replaceString(query, old, new):
 	for item in old:
 		query1 = query1.replace(item, new, 1)
 	query=query1+query2
-	print(query1+"."+query2)
 	return query
 
 
-
 def whereClause(query):
-	#add underscore to where attribute
+    #add underscore to where attribute
+	if " where " not in query:
+		return query
+	
 	start = 'where '
 	end = ' is'
-	mid=query[query.find(start)+len(start):query.rfind(end)]
+	mid=query[query.find(start)+len(start):query.find(end)]
 
 	mid2=mid.replace(' ','_')
 	mid2=mid2.replace('_,_',', ')
@@ -45,30 +46,87 @@ def whereClause(query):
 	mid2=mid2.replace('_,',', ')
 
 	query=query.replace(mid,mid2)
+
+	if " and " in query:
+		start=' and '
+		end = ' is'
+		mid=query[query.find(start)+len(start):query.rfind(end)]
+
+		mid2=mid.replace(' ','_')
+		mid2=mid2.replace('_,_',', ')
+		mid2=mid2.replace(',_',', ')
+		mid2=mid2.replace('_,',', ')
+
+		query=query.replace(mid,mid2)
+	elif " or " in query:
+		start=' or '
+		end = ' is'
+		mid=query[query.find(start)+len(start):query.rfind(end)]
+
+		mid2=mid.replace(' ','_')
+		mid2=mid2.replace('_,_',', ')
+		mid2=mid2.replace(',_',', ')
+		mid2=mid2.replace('_,',', ')
+
+		query=query.replace(mid,mid2)
+
+
 	#============================================
 	whereDict=	{
-					"is equal to": "=",
-					"is greater than": ">",
-					"is greater than": ">",
 					"is greater than or equal to": ">=",
 					"is greater than equal to": ">=",
-					"is less than": "<",
 					"is less than or equal to": "<=",
 					"is less than equal to": "<=",
-					"is not equal to": "!="
+
+					"is equal to": "=",
+					"is greater than": ">",
+					"is less than": "<",
+					"is not equal to": "!=",
+					
+					"is between": "BETWEEN",
+					"is":"="
 				}
 
 	for key in whereDict:
-		query = query.replace(key, whereDict[key], 1)
+		query = query.replace(key, whereDict[key])
 
 	return query
 
+def orderByClause(query):
+	
+	if " sorted by " not in query:
+		return query
+
+	query=query.replace(" sorted by "," order by ")
+	
+	start = 'order by '
+	end = ' in'
+	mid=query[query.find(start)+len(start):query.find(end)]
+
+	mid2=mid.replace(' ','_')
+	mid2=mid2.replace('_,_',', ')
+	mid2=mid2.replace(',_',', ')
+	mid2=mid2.replace('_,',', ')
+
+	query=query.replace(mid,mid2)
+
+	#========================================================================
+
+	orderByDict={
+					"in ascending order": "ASC",
+					"in descending order": "DESC"
+				}
+
+	for key in orderByDict:
+		query = query.replace(key, orderByDict[key])
+
+	print("HELLO")
+	return query
 
 def topX_Limit(query):
 	startIndex=query.find(" top ", 0, query.find(" from "))
 	if(startIndex==-1):
 		startIndex=query.find(" first ", 0, query.find(" from "))
-		
 		if(startIndex==-1):
 			return query
 		else:
@@ -101,6 +159,7 @@ def spaceToUnderScore(query):
 	query=query.replace(mid,mid2)
 	return query
 
-query="show me everything from products where product id is between 1 and 10"
+
+query="show me everything from departments sorted by department_id in ascending order"
 query=processVoice(query)
-print("FINAL",query)
+print("FINAL: ",query)
