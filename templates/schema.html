@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>About</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/css/styles.css">
+  <link rel="stylesheet" href="static/css/schema.css">
+  <script type="text/javascript">
+    $(function () {
+      $("#navigation").load("navigation.html");
+    });
+  </script>
+  <style>
+  </style>
+</head>
+
+<body style="background-color: white;">
+  <div id="navigation"></div>
+  <div class="container-fluid" style="font-size: 15px; margin-left:20px;">
+    <!-- <button onclick="show()">Show Images</button> -->
+    <br>
+    <input type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="View ERD" onclick="check_value(1)" value="MySQL ERD"></button>
+    <input type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="right" title="View ERD and Schema" onclick="check_value(2)" value="MySQL ERD+Schema"></button>
+    <input type="button" class="btn btn-info" data-toggle="tooltip" data-placement="right" title="View Schema" onclick="check_value(3)" value="BigQuery Schema"></button>
+    <input type="button" class="btn btn-info" data-toggle="tooltip" data-placement="right" title="View Schema" onclick="check_value(4)" value="MongoDB Schema"></button>
+    <hr>
+    
+    <div id='imagedest'>
+    </div>
+      
+    <hr>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+    integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+  <script src="static/js/schema.js"></script>
+</body>
+
+</html>

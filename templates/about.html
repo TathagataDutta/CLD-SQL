@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>About</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/css/styles.css">
+  <script type="text/javascript">
+    $(function () {
+      $("#navigation").load("navigation.html");
+    });
+  </script>
+  <style>
+  </style>
+</head>
+
+<body style="background-image: url(static/images/About2.png);
+              background-repeat:no-repeat;
+              background-size:cover;">
+  <div id="navigation"></div>
+  <div class="container-fluid" style="font-size: 15px; margin-left:20px; width:570px">
+    <div class="text-center" style="padding-top: 20px;">
+      <h2>About This Project</h2>
+    </div>
+    <br>
+    <h3>Introduction</h3>
+    <br>
+    <p style="font-size: 20px;">
+      This web application allows a user to run queries on MySQL, BigQuery and MongoDB Atlas through google cloud.
+      <br><br>
+      It also has support for voice queries live via a microphone and uses some NLP to convert them to regular queries. 
+      This is currently supported for MySQL only.
+    </p>
+    <br>
+
+    <br>
+    <br>
+    <h3>Acknowledgment</h3>
+    <br>
+    <p style="font-size: 20px;">We would like to express our sincere gratitude to Dr. Saed Sayad, our professor of 2020 Spring CS527 DBDS
+      class for his exceptional guidance and continuous encouragement.
+    </p>
+    <br><br>
+    <h3>References & Useful Links</h3>
+    <ul style="list-style-type:square; font-size: 18px;">
+      <li>https://cloud.google.com/</li>
+      <li>https://www.mongodb.com/</li>
+      <li>https://flask.palletsprojects.com/en/1.1.x/</li>
+      <li>https://api.jquery.com/</li>
+      <li>https://getbootstrap.com/</li>
+    </ul>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+    integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

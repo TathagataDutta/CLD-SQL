@@ -355,6 +355,16 @@ def voiceBasedPage():
 			return render_template("voiceBased.html", stmt="",time="",query="",chc="ms")
 
 
+@app.route('/schema.html', methods=["GET","POST"])
+def schema():
+	return render_template('schema.html')
+
+
+@app.route('/about.html', methods=["GET","POST"])
+def about():
+	return render_template('about.html')
+
+
 def sqlTable(rows,header):
 	h=""
 	for x in header:
