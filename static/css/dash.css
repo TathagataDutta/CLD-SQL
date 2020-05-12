@@ -13,7 +13,7 @@
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  /* font-family: "Open Sans", sans-serif; */
   background-color: #282828;
 }
 
@@ -103,7 +103,7 @@ body {
   margin-bottom: 1em;
   font-size: 1em;
   text-align: center;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .slider-page__title--big {
