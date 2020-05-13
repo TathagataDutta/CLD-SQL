@@ -390,7 +390,7 @@ def processVoice(query):
 	query=" "+query
 	select=[" find", " show", " give"]
 	remove=[" me", " us", " the"]
-	star=[" star"," everything", " entries", "entry"]
+	star=[" star"," everything", " entries", "entry", "anything"]
 	and_=[" and"]
 
 	query=replaceString(query,select," select")
